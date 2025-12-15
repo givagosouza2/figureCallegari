@@ -299,8 +299,8 @@ with tab1:
                 
                 fig_v, ax_v = plt.subplots(figsize=(10, 6))
                 ax_v.plot(t_new, norma, 'k-', label='Vertical')
-                ax_v.plot(t_new[tp1], p1_acc, 'ro', label='Vertical')
-                ax_v.plot(t_new[tp2], p2_acc, 'ro', label='Vertical')
+                ax_v.plot(tp1, p1_acc, 'ro', label='Vertical')
+                ax_v.plot(tp2, p2_acc, 'ro', label='Vertical')
                 ax_v.set_xlabel("Tempo (s)")
                 ax_v.set_ylabel("Aceleração (Vertical)")
                 ax_v.legend(loc="lower left")
