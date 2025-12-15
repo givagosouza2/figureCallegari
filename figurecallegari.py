@@ -278,6 +278,7 @@ with tab1:
                 ax_v.set_xlabel("Tempo (s)")
                 ax_v.set_ylabel("Aceleração (Vertical)")
                 ax_v.legend(loc="lower left")
+                ax_v.set_xlim([15,30])
                 
                 st.pyplot(fig_v)
 
