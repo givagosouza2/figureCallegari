@@ -197,7 +197,7 @@ with tab1:
             for i in range(num_ciclos):
                 on, of = onset_adj[i], offset_adj[i]
                 ax3.axvline(on+0.6, ls='--', color='orange', label='Início' if i==0 else "")
-                ax3.axvline(of-1;2, ls='--', color='green',  label='Fim' if i==0 else "")
+                ax3.axvline(of-1.2, ls='--', color='green',  label='Fim' if i==0 else "")
                 ax3.axvspan(on+0.6, of-1.2, color='gray', alpha=0.3, label='Teste' if i==0 else "")
                 if i < len(stand_adj): ax3.axvline(stand_adj[i], ls='--', color='red',   label='Pico em pé' if i==0 else "")
                 if i < len(sit_adj):   ax3.axvline(sit_adj[i],   ls='--', color='black', label='Pico para sentar' if i==0 else "")
