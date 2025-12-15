@@ -62,7 +62,7 @@ with tab1:
             "Arquivo (.csv: X, Y, Z em mm)", type=["csv"], key="kin_file"
         )
 
-         uploaded_file_acc = st.file_uploader(
+        uploaded_file_acc = st.file_uploader(
             "Arquivo (.txt: tempo(ms); ax; ay; az) — separador ';'",
             type=["txt"],
             key="acc_file",
