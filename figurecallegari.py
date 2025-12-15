@@ -392,6 +392,7 @@ with tab1:
                     ax_v.set_xlabel("Tempo (s)")
                     ax_v.set_ylabel("Velocidade angular (ML)")
                     ax_v.legend(loc="lower left")
+                    ax_v.set_xlim([5,20])
                     st.pyplot(fig_v)
 
             
