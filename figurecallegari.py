@@ -71,7 +71,7 @@ with tab1:
         uploaded_file_gyro = st.file_uploader(
             "Arquivo (.txt: tempo(ms); gx; gy; gz) — separador ';'",
             type=["txt"],
-            key="acc_file",
+            key="gyro_file",
         )
 
 
