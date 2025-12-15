@@ -257,7 +257,7 @@ with tab1:
                     acc_x = detrend(acc_x)
                     acc_y = detrend(acc_y)
                     acc_z = detrend(acc_z)
-                cutoff_acc = 4
+                cutoff_acc = 2
                 if do_filter:
                     acc_x = low_pass_filter(acc_x, cutoff_acc, new_fs)
                     acc_y = low_pass_filter(acc_y, cutoff_acc, new_fs)
