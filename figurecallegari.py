@@ -294,7 +294,7 @@ with tab1:
                 p2_acc = np.max(norma[t1+200:t2])
                 for index, valor in enumerate(norma[t1+200:t2]):
                     if valor == p2_acc:
-                        tp2 = t_new[index+t1+500]
+                        tp2 = t_new[index+t1+200]
                         break
                 
                 fig_v, ax_v = plt.subplots(figsize=(10, 6))
