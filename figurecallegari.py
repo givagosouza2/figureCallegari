@@ -179,9 +179,9 @@ with tab1:
             ax2.plot(t, disp_y, 'k-', label="Desloc. AP")
             for i in range(num_ciclos):
                 on, of = onset_adj[i], offset_adj[i]
-                ax2.axvline(on+0.8, ls='--', color='orange', label='Início' if i==0 else "")
-                ax2.axvline(of-0.8, ls='--', color='green',  label='Fim' if i==0 else "")
-                ax2.axvspan(on+0.8, of-0.8, color='gray', alpha=0.3, label='Teste' if i==0 else "")
+                ax2.axvline(on+0.6, ls='--', color='orange', label='Início' if i==0 else "")
+                ax2.axvline(of-1, ls='--', color='green',  label='Fim' if i==0 else "")
+                ax2.axvspan(on+0.6, of-1, color='gray', alpha=0.3, label='Teste' if i==0 else "")
                 if i < len(stand_adj): ax2.axvline(stand_adj[i], ls='--', color='red',   label='Pico em pé' if i==0 else "")
                 if i < len(sit_adj):   ax2.axvline(sit_adj[i],   ls='--', color='black', label='Pico para sentar' if i==0 else "")
             for k, tp in enumerate(peak_adj):
