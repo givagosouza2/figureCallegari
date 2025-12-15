@@ -70,7 +70,7 @@ with tab1:
 
 
         st.markdown("**Trigger (alinha t=0)**")
-        trigger_idx_shift = st.number_input("Índice de referência", 0, 100000, 0, 1, key="kin_trig")
+        trigger_idx_shift = 876
 
         # Defaults solicitados: detrend desmarcado, filtro marcado
         do_detrend = False
@@ -272,7 +272,7 @@ with tab1:
                     v_acc = np.abs(acc_y)
                     ml_acc = np.abs(acc_x)
                     ap_acc = np.abs(acc_z)
-                
+                t_new = t_new-6 
                 fig_v, ax_v = plt.subplots(figsize=(10, 6))
                 ax_v.plot(t_new, v_acc, 'k-', label='Vertical')
                 ax_v.set_xlabel("Tempo (s)")
