@@ -359,7 +359,8 @@ with tab1:
             
                     t_start, t_end = float(tempo_s[0]), float(tempo_s[-1])
                     t_new = np.arange(t_start, t_end, 1.0/new_fs)
-                    t = t_new - 7.48
+                    t = t_new - 6.5
+                    
             
                     fx = interp1d(tempo_s, gyro_x_raw, kind="linear", bounds_error=False, fill_value="extrapolate")
                     fy = interp1d(tempo_s, gyro_y_raw, kind="linear", bounds_error=False, fill_value="extrapolate")
