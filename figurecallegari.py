@@ -251,7 +251,7 @@ with tab1:
                 acc_x = fx(t_new)
                 acc_y = fy(t_new)
                 acc_z = fz(t_new)
-        
+                do_detrend = True
                 # 3) Pré-processamento
                 if do_detrend:
                     acc_x = detrend(acc_x)
