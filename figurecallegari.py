@@ -323,8 +323,8 @@ with tab1:
                 
                 st.pyplot(fig_v)
 
-                if uploaded_file_acc is not None:
-                    # 1) Lê arquivo: tempo(ms); ax; ay; az com ';'
+                if uploaded_file_gyro is not None:
+                    #1) Lê arquivo: tempo(ms); ax; ay; az com ';'
                     df = pd.read_csv(uploaded_file_gyro, sep=";", engine="python")
                     if df.shape[1] < 4:
                         st.error("O arquivo deve ter ao menos 4 colunas: tempo(ms); ax; ay; az.")
