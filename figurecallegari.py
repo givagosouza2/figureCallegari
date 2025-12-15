@@ -168,21 +168,7 @@ with tab1:
 
         # PLOT 1 (t=0 + dois gráficos lado a lado)
         with c_plot1:
-            # Trigger
-            st.markdown("**Trigger — Cinemática (t = 0)**")
-            fig_trig_kin, ax_trig_kin = plt.subplots(figsize=(10, 3))
-            nwin = min(2000, len(t))
-            ax_trig_kin.plot(t[:nwin], disp_z[:nwin], 'k-', label="Desloc.vertical")
-            ax_trig_kin.axvline(0, color='r', label="t=0")
-            ax_trig_kin.set_xlabel("Tempo (s)")
-            ax_trig_kin.set_ylabel("Amplitude (m)")
-            ax_trig_kin.legend(loc="lower left")
-            st.pyplot(fig_trig_kin)
-
-            c_plot11, c_plot12 = st.columns(2)
-
-            with c_plot11:
-                fig2, ax2 = plt.subplots(figsize=(10, 6))
+            fig2, ax2 = plt.subplots(figsize=(10, 6))
                 ax2.plot(t, disp_y, 'k-', label="Desloc. AP")
                 for i in range(num_ciclos):
                     on, of = onset_adj[i], offset_adj[i]
@@ -197,7 +183,7 @@ with tab1:
                 ax2.legend(loc="lower left")
                 st.pyplot(fig2)
 
-            with c_plot12:
+            
                 fig3, ax3 = plt.subplots(figsize=(10, 6))
                 ax3.plot(t, disp_z, 'k-', label="Desloc. vertical")
                 for i in range(num_ciclos):
