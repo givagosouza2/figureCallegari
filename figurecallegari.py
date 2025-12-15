@@ -169,35 +169,35 @@ with tab1:
         # PLOT 1 (t=0 + dois gráficos lado a lado)
         with c_plot1:
             fig2, ax2 = plt.subplots(figsize=(10, 6))
-                ax2.plot(t, disp_y, 'k-', label="Desloc. AP")
-                for i in range(num_ciclos):
-                    on, of = onset_adj[i], offset_adj[i]
-                    ax2.axvline(on, ls='--', color='orange', label='Início' if i==0 else "")
-                    ax2.axvline(of, ls='--', color='green',  label='Fim' if i==0 else "")
-                    ax2.axvspan(on, of, color='gray', alpha=0.3, label='Teste' if i==0 else "")
-                    if i < len(stand_adj): ax2.axvline(stand_adj[i], ls='--', color='red',   label='Pico em pé' if i==0 else "")
-                    if i < len(sit_adj):   ax2.axvline(sit_adj[i],   ls='--', color='black', label='Pico para sentar' if i==0 else "")
-                for k, tp in enumerate(peak_adj):
-                    ax2.axvline(tp, ls='--', color='blue', label='Mínimos' if k==0 else "")
-                ax2.set_xlabel("Tempo (s)"); ax2.set_ylabel("Amplitude (m)")
-                ax2.legend(loc="lower left")
-                st.pyplot(fig2)
+            ax2.plot(t, disp_y, 'k-', label="Desloc. AP")
+            for i in range(num_ciclos):
+                on, of = onset_adj[i], offset_adj[i]
+                ax2.axvline(on, ls='--', color='orange', label='Início' if i==0 else "")
+                ax2.axvline(of, ls='--', color='green',  label='Fim' if i==0 else "")
+                ax2.axvspan(on, of, color='gray', alpha=0.3, label='Teste' if i==0 else "")
+                if i < len(stand_adj): ax2.axvline(stand_adj[i], ls='--', color='red',   label='Pico em pé' if i==0 else "")
+                if i < len(sit_adj):   ax2.axvline(sit_adj[i],   ls='--', color='black', label='Pico para sentar' if i==0 else "")
+            for k, tp in enumerate(peak_adj):
+                ax2.axvline(tp, ls='--', color='blue', label='Mínimos' if k==0 else "")
+            ax2.set_xlabel("Tempo (s)"); ax2.set_ylabel("Amplitude (m)")
+            ax2.legend(loc="lower left")
+            st.pyplot(fig2)
 
             
-                fig3, ax3 = plt.subplots(figsize=(10, 6))
-                ax3.plot(t, disp_z, 'k-', label="Desloc. vertical")
-                for i in range(num_ciclos):
-                    on, of = onset_adj[i], offset_adj[i]
-                    ax3.axvline(on, ls='--', color='orange', label='Início' if i==0 else "")
-                    ax3.axvline(of, ls='--', color='green',  label='Fim' if i==0 else "")
-                    ax3.axvspan(on, of, color='gray', alpha=0.3, label='Teste' if i==0 else "")
-                    if i < len(stand_adj): ax3.axvline(stand_adj[i], ls='--', color='red',   label='Pico em pé' if i==0 else "")
-                    if i < len(sit_adj):   ax3.axvline(sit_adj[i],   ls='--', color='black', label='Pico para sentar' if i==0 else "")
-                for k, tp in enumerate(peak_adj):
-                    ax3.axvline(tp, ls='--', color='blue', label='Mínimos' if k==0 else "")
-                ax3.set_xlabel("Tempo (s)"); ax3.set_ylabel("Amplitude (m)")
-                ax3.legend(loc="lower left")
-                st.pyplot(fig3)
+            fig3, ax3 = plt.subplots(figsize=(10, 6))
+            ax3.plot(t, disp_z, 'k-', label="Desloc. vertical")
+            for i in range(num_ciclos):
+                on, of = onset_adj[i], offset_adj[i]
+                ax3.axvline(on, ls='--', color='orange', label='Início' if i==0 else "")
+                ax3.axvline(of, ls='--', color='green',  label='Fim' if i==0 else "")
+                ax3.axvspan(on, of, color='gray', alpha=0.3, label='Teste' if i==0 else "")
+                if i < len(stand_adj): ax3.axvline(stand_adj[i], ls='--', color='red',   label='Pico em pé' if i==0 else "")
+                if i < len(sit_adj):   ax3.axvline(sit_adj[i],   ls='--', color='black', label='Pico para sentar' if i==0 else "")
+            for k, tp in enumerate(peak_adj):
+                ax3.axvline(tp, ls='--', color='blue', label='Mínimos' if k==0 else "")
+            ax3.set_xlabel("Tempo (s)"); ax3.set_ylabel("Amplitude (m)")
+            ax3.legend(loc="lower left")
+            st.pyplot(fig3)
 
             # Tabela de tempos por ciclo + download
             rows = []
