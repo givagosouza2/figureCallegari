@@ -393,6 +393,15 @@ with tab1:
                     ax_v.set_ylabel("Velocidade angular (ML)")
                     ax_v.legend(loc="lower left")
                     ax_v.set_xlim([5,20])
+                    for i in range(num_ciclos):
+                        on, of = onset_adj[i], offset_adj[i]
+                        ax_v.axvline(on, ls='--', color='orange', label='Início' if i==0 else "")
+                        ax_v.axvline(of, ls='--', color='green',  label='Fim' if i==0 else "")
+                        ax_v.axvspan(on, of, color='gray', alpha=0.3, label='Teste' if i==0 else "")
+                        if i < len(stand_adj): ax_v.axvline(stand_adj[i], ls='--', color='red',   label='Pico em pé' if i==0 else "")
+                        if i < len(sit_adj):   ax_v.axvline(sit_adj[i],   ls='--', color='black', label='Pico para sentar' if i==0 else "")
+                    for k, tp in enumerate(peak_adj):
+                        ax_v.axvline(tp, ls='--', color='blue', label='Mínimos' if k==0 else "")
                     st.pyplot(fig_v)
 
             
