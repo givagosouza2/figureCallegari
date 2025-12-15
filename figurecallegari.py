@@ -373,16 +373,11 @@ with tab1:
                         gyro_x = detrend(gyro_x)
                         gyro_y = detrend(gyro_y)
                         gyro_z = detrend(gyro_z)
-            
+                    cutoff_gyro = 1.5
                     if do_filter:
-                        gyro_x = low_pass_filter(gyro_x, cutoff_acc, new_fs)
-                        gyro_y = low_pass_filter(gyro_y, cutoff_acc, new_fs)
-                        gyro_z = low_pass_filter(gyro_z, cutoff_acc, new_fs)
-            
-                    
-                    v_gyro = np.abs(gyro_y)
-                    ml_gyro = np.abs(gyro_x)
-                    ap_gyro = np.abs(gyro_z)
+                        gyro_x = low_pass_filter(gyro_x, cutoff_gyro, new_fs)
+                        gyro_y = low_pass_filter(gyro_y, cutoff_gyro, new_fs)
+                        gyro_z = low_pass_filter(gyro_z, cutoff_gyro, new_fs)
 
                     norma_gyro = np.sqrt(gyro_x**2+gyro_y**2+gyro_z**2)
                     t = t_new - 6.5
