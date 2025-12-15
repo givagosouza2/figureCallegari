@@ -68,6 +68,12 @@ with tab1:
             key="acc_file",
         )
 
+        uploaded_file_gyro = st.file_uploader(
+            "Arquivo (.txt: tempo(ms); gx; gy; gz) — separador ';'",
+            type=["txt"],
+            key="acc_file",
+        )
+
 
         st.markdown("**Trigger (alinha t=0)**")
         trigger_idx_shift = 876
@@ -316,6 +322,77 @@ with tab1:
                 ax_v.set_xlim([5,20])
                 
                 st.pyplot(fig_v)
+
+                if uploaded_file_acc is not None:
+                    # 1) Lê arquivo: tempo(ms); ax; ay; az com ';'
+                    df = pd.read_csv(uploaded_file_gyro, sep=";", engine="python")
+                    if df.shape[1] < 4:
+                        st.error("O arquivo deve ter ao menos 4 colunas: tempo(ms); ax; ay; az.")
+                        st.stop()
+            
+                    try:
+                        tempo_ms = df.iloc[:, 0].astype(float).values
+                        gyro_x_raw = df.iloc[:, 1].astype(float).values
+                        gyro_y_raw = df.iloc[:, 2].astype(float).values
+                        gyro_z_raw = df.iloc[:, 3].astype(float).values
+                    except Exception:
+                        st.error("As quatro primeiras colunas precisam ser numéricas.")
+                        st.stop()
+            
+                    # 2) Interpola/reamostra para 100 Hz
+                    new_fs = 100.0  # Hz
+                    # tempo em segundos (converte ms -> s)
+                    tempo_s = tempo_ms / 1000.0
+            
+                    # garante tempo crescente e sem duplicatas
+                    order = np.argsort(tempo_s)
+                    tempo_s, gyro_x_raw, gyro_y_raw, gyro_z_raw = (
+                        tempo_s[order], gyro_x_raw[order], gyro_y_raw[order], gyro_z_raw[order]
+                    )
+                    uniq = np.diff(tempo_s, prepend=tempo_s[0] - 1.0) > 0
+                    tempo_s, gyro_x_raw, gyro_y_raw, gyro_z_raw = (
+                        tempo_s[uniq], gyro_x_raw[uniq], gyro_y_raw[uniq], gyro_z_raw[uniq]
+                    )
+                    if len(tempo_s) < 2:
+                        st.error("Tempo insuficiente após ordenar/remover duplicatas.")
+                        st.stop()
+            
+                    t_start, t_end = float(tempo_s[0]), float(tempo_s[-1])
+                    t_new = np.arange(t_start, t_end, 1.0/new_fs)
+                    t = t_new - 6.59
+            
+                    fx = interp1d(tempo_s, gyro_x_raw, kind="linear", bounds_error=False, fill_value="extrapolate")
+                    fy = interp1d(tempo_s, gyro_y_raw, kind="linear", bounds_error=False, fill_value="extrapolate")
+                    fz = interp1d(tempo_s, gyro_z_raw, kind="linear", bounds_error=False, fill_value="extrapolate")
+                    gyro_x = fx(t_new)
+                    gyro_y = fy(t_new)
+                    gyro_z = fz(t_new)
+            
+                    # 3) Pré-processamento
+                    if do_detrend:
+                        gyro_x = detrend(gyro_x)
+                        gyro_y = detrend(gyro_y)
+                        gyro_z = detrend(gyro_z)
+            
+                    if do_filter:
+                        gyro_x = low_pass_filter(gyro_x, cutoff_acc, new_fs)
+                        gyro_y = low_pass_filter(gyro_y, cutoff_acc, new_fs)
+                        gyro_z = low_pass_filter(gyro_z, cutoff_acc, new_fs)
+            
+                    
+                    v_gyro = np.abs(gyro_y)
+                    ml_gyro = np.abs(gyro_x)
+                    ap_gyro = np.abs(gyro_z)
+
+                    norma_gyro = np.sqrt(gyro_x**2+gyro_y**2+gyro_z**2)
+            
+                    
+                    fig_v, ax_v = plt.subplots(figsize=(10, 6))
+                    ax_v.plot(t, norma_gyro, 'k-', label='Vertical')
+                    ax_v.set_xlabel("Tempo (s)")
+                    ax_v.set_ylabel("Velocidade angular (ML)")
+                    ax_v.legend(loc="lower left")
+                    st.pyplot(fig_v)
 
             
     else:
