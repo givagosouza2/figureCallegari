@@ -201,23 +201,6 @@ with tab1:
             ax3.set_xlim([15,30])
             st.pyplot(fig3)
 
-            # Tabela de tempos por ciclo + download
-            rows = []
-            for i in range(num_ciclos):
-                t_on, t_off = onset_adj[i], offset_adj[i]
-                t_st = stand_adj[i] if i < len(stand_adj) else np.nan
-                t_si = sit_adj[i]   if i < len(sit_adj)   else np.nan
-                t_min = first_min_within(peak_adj, t_on, t_off)
-                rows.append({"ciclo": i, "inicio_s": t_on, "final_s": t_off,
-                             "pico_em_pe_s": t_st, "pico_para_sentar_s": t_si, "3m_s": t_min})
-            df_tempos = pd.DataFrame(rows)
-            st.subheader("Tempos por ciclo — Cinemática")
-            st.dataframe(df_tempos, width='stretch')
-            st.download_button(
-                "Baixar CSV (Cinemática)",
-                df_tempos.to_csv(index=False).encode("utf-8"),
-                file_name="tempos_ciclos_cinematica.csv",
-                mime="text/csv"
-            )
+            
     else:
         st.info("Carregue um arquivo de cinemática para visualizar.")
