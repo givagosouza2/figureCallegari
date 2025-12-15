@@ -196,9 +196,9 @@ with tab1:
             ax3.plot(t, disp_z, 'k-', label="Desloc. vertical")
             for i in range(num_ciclos):
                 on, of = onset_adj[i], offset_adj[i]
-                ax3.axvline(on, ls='--', color='orange', label='Início' if i==0 else "")
-                ax3.axvline(of, ls='--', color='green',  label='Fim' if i==0 else "")
-                ax3.axvspan(on, of, color='gray', alpha=0.3, label='Teste' if i==0 else "")
+                ax3.axvline(on+0.6, ls='--', color='orange', label='Início' if i==0 else "")
+                ax3.axvline(of-1;2, ls='--', color='green',  label='Fim' if i==0 else "")
+                ax3.axvspan(on+0.6, of-1.2, color='gray', alpha=0.3, label='Teste' if i==0 else "")
                 if i < len(stand_adj): ax3.axvline(stand_adj[i], ls='--', color='red',   label='Pico em pé' if i==0 else "")
                 if i < len(sit_adj):   ax3.axvline(sit_adj[i],   ls='--', color='black', label='Pico para sentar' if i==0 else "")
             for k, tp in enumerate(peak_adj):
@@ -306,9 +306,9 @@ with tab1:
                 ax_v.legend(loc="lower left")
                 for i in range(num_ciclos):
                     on, of = onset_adj[i], offset_adj[i]
-                    ax_v.axvline(on, ls='--', color='orange', label='Início' if i==0 else "")
-                    ax_v.axvline(of, ls='--', color='green',  label='Fim' if i==0 else "")
-                    ax_v.axvspan(on, of, color='gray', alpha=0.3, label='Teste' if i==0 else "")
+                    ax_v.axvline(on+0.6, ls='--', color='orange', label='Início' if i==0 else "")
+                    ax_v.axvline(of-1.2, ls='--', color='green',  label='Fim' if i==0 else "")
+                    ax_v.axvspan(on+0.6, of-1.2, color='gray', alpha=0.3, label='Teste' if i==0 else "")
                     if i < len(stand_adj): ax_v.axvline(stand_adj[i], ls='--', color='red',   label='Pico em pé' if i==0 else "")
                     if i < len(sit_adj):   ax_v.axvline(sit_adj[i],   ls='--', color='black', label='Pico para sentar' if i==0 else "")
                 for k, tp in enumerate(peak_adj):
