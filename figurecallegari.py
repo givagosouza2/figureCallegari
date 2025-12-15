@@ -272,8 +272,9 @@ with tab1:
                     v_acc = np.abs(acc_y)
                     ml_acc = np.abs(acc_x)
                     ap_acc = np.abs(acc_z)
+                
                 fig_v, ax_v = plt.subplots(figsize=(10, 6))
-                ax_v.plot(t, v_acc, 'k-', label='Vertical')
+                ax_v.plot(t_new, v_acc, 'k-', label='Vertical')
                 ax_v.set_xlabel("Tempo (s)")
                 ax_v.set_ylabel("Aceleração (Vertical)")
                 ax_v.legend(loc="lower left")
