@@ -276,7 +276,7 @@ with tab1:
                 t_new = t_new-6 
 
                 for index, valor in enumerate(t_new):
-                    if valor > 5:
+                    if valor > 10:
                         t1 = index
                         break
 
@@ -299,7 +299,7 @@ with tab1:
                 
                 fig_v, ax_v = plt.subplots(figsize=(10, 6))
                 ax_v.plot(t_new, norma, 'k-', label='Vertical')
-                ax_v.plot(tp1, p1_acc, 'ro', label='Vertical')
+                ax_v.plot(tp1, p1_acc, 'bo', label='Vertical')
                 ax_v.plot(tp2, p2_acc, 'ro', label='Vertical')
                 ax_v.set_xlabel("Tempo (s)")
                 ax_v.set_ylabel("Aceleração (Vertical)")
