@@ -181,6 +181,7 @@ with tab1:
                 ax2.axvline(tp, ls='--', color='blue', label='Mínimos' if k==0 else "")
             ax2.set_xlabel("Tempo (s)"); ax2.set_ylabel("Amplitude (m)")
             ax2.legend(loc="lower left")
+            ax2.set_limx([10,50])
             st.pyplot(fig2)
 
             
