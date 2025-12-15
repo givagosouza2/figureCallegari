@@ -359,16 +359,14 @@ with tab1:
                         st.stop()
             
                     t_start, t_end = float(tempo_s[0]), float(tempo_s[-1])
-                    t_new = np.arange(t_start, t_end, 1.0/new_fs)
-                    t = t_new - 6.5
-                    
+                    t_new = np.arange(t_start, t_end, 1.0/new_fs)                    
             
                     fx = interp1d(tempo_s, gyro_x_raw, kind="linear", bounds_error=False, fill_value="extrapolate")
                     fy = interp1d(tempo_s, gyro_y_raw, kind="linear", bounds_error=False, fill_value="extrapolate")
                     fz = interp1d(tempo_s, gyro_z_raw, kind="linear", bounds_error=False, fill_value="extrapolate")
-                    gyro_x = fx(t)
-                    gyro_y = fy(t)
-                    gyro_z = fz(t)
+                    gyro_x = fx(t_new)
+                    gyro_y = fy(t_new)
+                    gyro_z = fz(t_new)
             
                     # 3) Pré-processamento
                     if do_detrend:
@@ -387,6 +385,7 @@ with tab1:
                     ap_gyro = np.abs(gyro_z)
 
                     norma_gyro = np.sqrt(gyro_x**2+gyro_y**2+gyro_z**2)
+                    t = t_new - 6.5
             
                     
                     fig_v, ax_v = plt.subplots(figsize=(10, 6))
