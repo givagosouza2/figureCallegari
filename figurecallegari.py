@@ -274,8 +274,33 @@ with tab1:
                     ap_acc = np.abs(acc_z)
                 norma = np.sqrt(acc_x**2+acc_y**2+acc_z**2)
                 t_new = t_new-6 
+
+                for index, valor in enumerate(t_new):
+                    if valor > 5
+                        t1 = index
+                        break
+
+                for index, valor in enumerate(t_new):
+                    if valor > 30
+                        t2 = index
+                        break
+
+                p1_acc = np.max(norma[t1:t1+500])
+                for index, valor in enumerate(norma[t1:t2]):
+                    if valor == p1_acc:
+                        tp1 = t_new[index+t1]
+                        break
+                    
+                p2_acc = np.max(norma[t1+500:t2])
+                for index, valor in enumerate(norma[t1+500:t2]):
+                    if valor == p2_acc:
+                        tp2 = t_new[index+t1+500]
+                        break
+                
                 fig_v, ax_v = plt.subplots(figsize=(10, 6))
                 ax_v.plot(t_new, norma, 'k-', label='Vertical')
+                ax_v.plot(t_new[tp1], p1_acc, 'ro', label='Vertical')
+                ax_v.plot(t_new[tp2], p2_acc, 'ro', label='Vertical')
                 ax_v.set_xlabel("Tempo (s)")
                 ax_v.set_ylabel("Aceleração (Vertical)")
                 ax_v.legend(loc="lower left")
