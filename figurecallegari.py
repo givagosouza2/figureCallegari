@@ -366,9 +366,9 @@ with tab1:
                     fx = interp1d(tempo_s, gyro_x_raw, kind="linear", bounds_error=False, fill_value="extrapolate")
                     fy = interp1d(tempo_s, gyro_y_raw, kind="linear", bounds_error=False, fill_value="extrapolate")
                     fz = interp1d(tempo_s, gyro_z_raw, kind="linear", bounds_error=False, fill_value="extrapolate")
-                    gyro_x = fx(t_new)
-                    gyro_y = fy(t_new)
-                    gyro_z = fz(t_new)
+                    gyro_x = fx(t)
+                    gyro_y = fy(t)
+                    gyro_z = fz(t)
             
                     # 3) Pré-processamento
                     if do_detrend:
