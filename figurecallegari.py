@@ -276,12 +276,12 @@ with tab1:
                 t_new = t_new-6 
 
                 for index, valor in enumerate(t_new):
-                    if valor > 5
+                    if valor > 5:
                         t1 = index
                         break
 
                 for index, valor in enumerate(t_new):
-                    if valor > 30
+                    if valor > 30:
                         t2 = index
                         break
 
