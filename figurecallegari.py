@@ -181,7 +181,7 @@ with tab1:
                 ax2.axvline(tp, ls='--', color='blue', label='Mínimos' if k==0 else "")
             ax2.set_xlabel("Tempo (s)"); ax2.set_ylabel("Amplitude (m)")
             ax2.legend(loc="lower left")
-            ax2.set_xlim([10,50])
+            ax2.set_xlim([15,30])
             st.pyplot(fig2)
 
             
@@ -198,7 +198,7 @@ with tab1:
                 ax3.axvline(tp, ls='--', color='blue', label='Mínimos' if k==0 else "")
             ax3.set_xlabel("Tempo (s)"); ax3.set_ylabel("Amplitude (m)")
             ax3.legend(loc="lower left")
-            ax3.set_xlim([10,50])
+            ax3.set_xlim([15,30])
             st.pyplot(fig3)
 
             # Tabela de tempos por ciclo + download
