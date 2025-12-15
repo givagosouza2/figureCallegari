@@ -188,7 +188,7 @@ with tab1:
                 ax2.axvline(tp, ls='--', color='blue', label='Mínimos' if k==0 else "")
             ax2.set_xlabel("Tempo (s)"); ax2.set_ylabel("Amplitude (m)")
             ax2.legend(loc="lower left")
-            ax2.set_xlim([15,30])
+            ax2.set_xlim([5,20])
             st.pyplot(fig2)
 
             
@@ -205,7 +205,7 @@ with tab1:
                 ax3.axvline(tp, ls='--', color='blue', label='Mínimos' if k==0 else "")
             ax3.set_xlabel("Tempo (s)"); ax3.set_ylabel("Amplitude (m)")
             ax3.legend(loc="lower left")
-            ax3.set_xlim([15,30])
+            ax3.set_xlim([5,20])
             st.pyplot(fig3)
             
             if uploaded_file_acc is not None:
@@ -278,7 +278,7 @@ with tab1:
                 ax_v.set_xlabel("Tempo (s)")
                 ax_v.set_ylabel("Aceleração (Vertical)")
                 ax_v.legend(loc="lower left")
-                ax_v.set_xlim([15,30])
+                ax_v.set_xlim([5,20])
                 
                 st.pyplot(fig_v)
 
