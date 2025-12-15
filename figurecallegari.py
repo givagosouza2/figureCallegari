@@ -62,6 +62,13 @@ with tab1:
             "Arquivo (.csv: X, Y, Z em mm)", type=["csv"], key="kin_file"
         )
 
+         uploaded_file_acc = st.file_uploader(
+            "Arquivo (.txt: tempo(ms); ax; ay; az) — separador ';'",
+            type=["txt"],
+            key="acc_file",
+        )
+
+
         st.markdown("**Trigger (alinha t=0)**")
         trigger_idx_shift = st.number_input("Índice de referência", 0, 100000, 0, 1, key="kin_trig")
 
@@ -200,6 +207,78 @@ with tab1:
             ax3.legend(loc="lower left")
             ax3.set_xlim([15,30])
             st.pyplot(fig3)
+            
+            if uploaded_file_acc is not None:
+                # 1) Lê arquivo: tempo(ms); ax; ay; az com ';'
+                df = pd.read_csv(uploaded_file_acc, sep=";", engine="python")
+                if df.shape[1] < 4:
+                    st.error("O arquivo deve ter ao menos 4 colunas: tempo(ms); ax; ay; az.")
+                    st.stop()
+        
+                try:
+                    tempo_ms = df.iloc[:, 0].astype(float).values
+                    acc_x_raw = df.iloc[:, 1].astype(float).values
+                    acc_y_raw = df.iloc[:, 2].astype(float).values
+                    acc_z_raw = df.iloc[:, 3].astype(float).values
+                except Exception:
+                    st.error("As quatro primeiras colunas precisam ser numéricas.")
+                    st.stop()
+        
+                # 2) Interpola/reamostra para 100 Hz
+                new_fs = 100.0  # Hz
+                # tempo em segundos (converte ms -> s)
+                tempo_s = tempo_ms / 1000.0
+        
+                # garante tempo crescente e sem duplicatas
+                order = np.argsort(tempo_s)
+                tempo_s, acc_x_raw, acc_y_raw, acc_z_raw = (
+                    tempo_s[order], acc_x_raw[order], acc_y_raw[order], acc_z_raw[order]
+                )
+                uniq = np.diff(tempo_s, prepend=tempo_s[0] - 1.0) > 0
+                tempo_s, acc_x_raw, acc_y_raw, acc_z_raw = (
+                    tempo_s[uniq], acc_x_raw[uniq], acc_y_raw[uniq], acc_z_raw[uniq]
+                )
+                if len(tempo_s) < 2:
+                    st.error("Tempo insuficiente após ordenar/remover duplicatas.")
+                    st.stop()
+        
+                t_start, t_end = float(tempo_s[0]), float(tempo_s[-1])
+                t_new = np.arange(t_start, t_end, 1.0/new_fs)
+        
+                fx = interp1d(tempo_s, acc_x_raw, kind="linear", bounds_error=False, fill_value="extrapolate")
+                fy = interp1d(tempo_s, acc_y_raw, kind="linear", bounds_error=False, fill_value="extrapolate")
+                fz = interp1d(tempo_s, acc_z_raw, kind="linear", bounds_error=False, fill_value="extrapolate")
+                acc_x = fx(t_new)
+                acc_y = fy(t_new)
+                acc_z = fz(t_new)
+        
+                # 3) Pré-processamento
+                if do_detrend:
+                    acc_x = detrend(acc_x)
+                    acc_y = detrend(acc_y)
+                    acc_z = detrend(acc_z)
+        
+                if do_filter:
+                    acc_x = low_pass_filter(acc_x, cutoff_acc, new_fs)
+                    acc_y = low_pass_filter(acc_y, cutoff_acc, new_fs)
+                    acc_z = low_pass_filter(acc_z, cutoff_acc, new_fs)
+        
+                # 4) Eixos (V, ML, AP) — regra simples baseada na maior média absoluta
+                if np.mean(np.abs(acc_x)) >= np.mean(np.abs(acc_y)):
+                    v_acc = np.abs(acc_x)
+                    ml_acc = np.abs(acc_y)
+                    ap_acc = np.abs(acc_z)
+                else:
+                    v_acc = np.abs(acc_y)
+                    ml_acc = np.abs(acc_x)
+                    ap_acc = np.abs(acc_z)
+                fig_v, ax_v = plt.subplots(figsize=(10, 6))
+                ax_v.plot(t, v_acc, 'k-', label='Vertical')
+                ax_v.set_xlabel("Tempo (s)")
+                ax_v.set_ylabel("Aceleração (Vertical)")
+                ax_v.legend(loc="lower left")
+                
+                st.pyplot(fig_v)
 
             
     else:
