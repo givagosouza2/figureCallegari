@@ -286,7 +286,7 @@ with tab1:
                         break
 
                 p1_acc = np.max(norma[t1:t1+500])
-                for index, valor in enumerate(norma[t1:t2]):
+                for index, valor in enumerate(norma[t1:t1+500]):
                     if valor == p1_acc:
                         tp1 = t_new[index+t1]
                         break
